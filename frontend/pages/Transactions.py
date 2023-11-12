@@ -44,6 +44,8 @@ with col5:
     limit = st.slider("Limit", 0.0, 1.0, 0.2, 0.01)
 with col6:
     aggressiveness = st.slider("Aggressiveness", 0, 5, 0)
+    
+st.write("Try out Node_77 to Node_88 with a price of 0.5")
 
 # Process Transaction Button
 if st.button("Process Transaction"):
