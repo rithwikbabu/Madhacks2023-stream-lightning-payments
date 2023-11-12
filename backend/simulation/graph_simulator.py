@@ -4,13 +4,13 @@ import networkx as nx
 import pandas as pd
 import random
 
-from hedera import (
-    AccountId,
-    PrivateKey,
-    Client,
-    TransferTransaction,
-    Hbar
-)
+# from hedera import (
+#     AccountId,
+#     PrivateKey,
+#     Client,
+#     TransferTransaction,
+#     Hbar
+# )
 
 class GraphSimulator:
     def __init__(self, use_hedera=False):
@@ -20,9 +20,9 @@ class GraphSimulator:
         self.hedera_accounts = {}
 
         # Initialize the Hedera client only if Hedera mode is enabled
-        if self.use_hedera:
-            self.client = Client.forTestnet()
-            self.client.setOperator(AccountId(0, 0, 1), PrivateKey.generate())
+        # if self.use_hedera:
+        #     self.client = Client.forTestnet()
+        #     self.client.setOperator(AccountId(0, 0, 1), PrivateKey.generate())
 
     def add_node(self, node_id, **attrs):
         # Initialize transactions data for the node
@@ -33,34 +33,34 @@ class GraphSimulator:
                 self.hedera_accounts[node_id] = hedera_account_id
 
     def add_channel(self, sender_id, receiver_id, amount):
-        if self.use_hedera:
-            # Convert the account strings to AccountId objects
-            sender_account_id = AccountId.fromString(sender_id)
-            receiver_account_id = AccountId.fromString(receiver_id)
-            sender_private_key = PrivateKey.fromString(
-                self.graph.nodes[sender_id]['private_key'])
+        # if self.use_hedera:
+            # # Convert the account strings to AccountId objects
+            # sender_account_id = AccountId.fromString(sender_id)
+            # receiver_account_id = AccountId.fromString(receiver_id)
+            # sender_private_key = PrivateKey.fromString(
+            #     self.graph.nodes[sender_id]['private_key'])
 
-            # Create the transfer transaction
-            transfer_transaction = TransferTransaction().addHbarTransfer(sender_account_id,
-                                                                         Hbar.fromTinybars(-amount)).addHbarTransfer(receiver_account_id, Hbar.fromTinybars(amount))
+            # # Create the transfer transaction
+            # transfer_transaction = TransferTransaction().addHbarTransfer(sender_account_id,
+            #                                                              Hbar.fromTinybars(-amount)).addHbarTransfer(receiver_account_id, Hbar.fromTinybars(amount))
 
-            # Freeze the transaction to prepare it for signing
-            frozen_transaction = transfer_transaction.freezeWith(self.client)
+            # # Freeze the transaction to prepare it for signing
+            # frozen_transaction = transfer_transaction.freezeWith(self.client)
 
-            # Sign the transaction with the sender's private key
-            signed_transaction = frozen_transaction.sign(sender_private_key)
+            # # Sign the transaction with the sender's private key
+            # signed_transaction = frozen_transaction.sign(sender_private_key)
 
-            # Execute the signed transaction
-            response = signed_transaction.execute(self.client)
+            # # Execute the signed transaction
+            # response = signed_transaction.execute(self.client)
 
-            # Fetch the receipt of the transaction
-            receipt = response.getReceipt(self.client)
+            # # Fetch the receipt of the transaction
+            # receipt = response.getReceipt(self.client)
 
-            status = receipt.status.toString()
-        else:
+            # status = receipt.status.toString()
+        # else:
             # Regular network simulation logic
-            self.graph.add_edge(sender_id, receiver_id, weight=amount)
-            status = "SUCCESS"
+        self.graph.add_edge(sender_id, receiver_id, weight=amount)
+        status = "SUCCESS"
 
         return status
 
