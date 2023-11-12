@@ -5,10 +5,6 @@ from matplotlib import colormaps as cm
 import matplotlib.colors as mcolors
 from pyvis.network import Network
 import streamlit as st
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 
 def create_network_visualization(graph_data, layout_options, transaction_paths=None):
     net = Network(height="750px", width="750px",
