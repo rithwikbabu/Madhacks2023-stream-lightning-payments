@@ -52,18 +52,5 @@ if st.button("Process Transaction"):
         time.sleep(2)
         placeholder.success(f"{route_string}  🚀")
         st.balloons()  # Release balloons on successful completion
-        
-        if st.button("Go to Visualizer"):
-            # Update session state with current addresses
-            st.session_state['user_address'] = user_address
-            st.session_state['recipient_address'] = recipient_address
-            st.session_state['amount'] = amount
-            st.session_state['threshold'] = threshold
-            st.session_state['limit'] = limit
-            st.session_state['aggressiveness'] = aggressiveness
-            
-            
-            # Redirect to the visualizer page
-            switch_page("Visualizer")
     else:
         st.error(f"Transaction Failed!: No path found between {user_address} and {recipient_address}")

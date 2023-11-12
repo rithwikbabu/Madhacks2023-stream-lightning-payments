@@ -30,15 +30,14 @@ st.markdown(
     **👈 Explore the features from the sidebar** to see how our software can transform your Bitcoin transaction experience!
 
     ### Learn More:
-    - Dive into our [Documentation](#) for technical details.
+    - Dive into our [Documentation](AI) for technical details.
     - Engage with our custom AI assistant for support and discussions.
 
     ### Demonstrations:
-    - See our software in action [Here](#).
-    - Explore case studies and success stories [Here](#).
+    - See our software in action [Here](Visualizer).
 
     ### Get Started:
-    Ready to optimize your Bitcoin transactions? [Contact Us](#) to get started or explore the demo versions in the sidebar.
+    Ready to optimize your Bitcoin transactions? [Create a node](Node) to get started or explore the demo versions in the sidebar.
     """
 )
 

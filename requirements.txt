@@ -21,6 +21,7 @@ favicon==0.7.0
 fonttools==4.44.0
 gitdb==4.0.11
 GitPython==3.1.40
+hedera-sdk-py==2.29.0
 htbuilder==0.6.2
 idna==3.4
 importlib-metadata==6.8.0
@@ -51,11 +52,11 @@ Pillow==10.1.0
 prompt-toolkit==3.0.40
 protobuf==4.25.0
 ptyprocess==0.7.0
-PuLP==2.7.0
 pure-eval==0.2.2
 pyarrow==14.0.1
 pydeck==0.8.1b0
 Pygments==2.16.1
+pyjnius==1.6.1
 pymdown-extensions==10.4
 pyparsing==3.1.1
 python-dateutil==2.8.2

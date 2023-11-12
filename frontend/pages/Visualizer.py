@@ -60,79 +60,42 @@ def create_network_visualization(graph_data, layout_options, transaction_paths=N
 
     return network_html
 
-st.title("Lightning Network Graph Simulator")
+st.title("BitRoute Network Graph Simulator")
 
 # Initialize the graph simulator
 simulator = GraphSimulator()
 layout_options = simulator.get_pyvis_options("force_atlas")
 simulator.import_graph_from_csv('lightning_like_graph_md.csv')
 
-# Use session state variables as default values if they exist
-user_address = st.session_state.get('user_address', '')
-recipient_address = st.session_state.get('recipient_address', '')
-amount = st.session_state.get('amount', 1.0)
-threshold = st.session_state.get('threshold', 0.5)
-limit = st.session_state.get('limit', 0.2)
-aggressiveness = st.session_state.get('aggressiveness', 3)
+# Simplified input for source, sink, and amount
+input_string = st.text_input("Enter source, sink, and amount separated by commas (e.g., source,sink,amount;source,sink,amount)")
+split_input = input_string.split(';')
 
-# Flag to determine if the paths are found
-paths_found = False
-
-# If the button is not pressed, show the inputs
-if 'button_pressed' not in st.session_state:
-    user_address = st.text_input("Your Address", value=user_address)
-    recipient_address = st.text_input("Recipient Address", value=recipient_address)
-    amount = st.number_input("Transaction Amount", min_value=0.01, max_value=100.0, value=amount)
-    threshold = st.slider("Threshold", 0.0, 1.0, threshold, 0.01)
-    limit = st.slider("Limit", 0.0, 1.0, limit, 0.01)
-    aggressiveness = st.slider("Aggressiveness", 0, 5, aggressiveness)
-
-    # Button to find paths
-    if st.button("Find Paths"):
-        st.session_state['button_pressed'] = True
-else:
-    # Define your commodities
-    commodities = [{'source': user_address, 'sink': recipient_address, 'amount': amount}]
-
+commodities = []
+for transaction in split_input:
+    parsed_input = transaction.split(',')
+    
+    if len(parsed_input) == 3:
+        source, sink, amount = parsed_input[0].strip(), parsed_input[1].strip(), float(parsed_input[2].strip())
+        commodities.append({'source': source, 'sink': sink, 'amount': amount})
+    
+    # Fixed values for threshold, limit, and aggressiveness for this example
+    threshold = 0.45
+    limit = 0.2
+    aggressiveness = 0
+    
+# Button to find paths
+if st.button("Find Paths"):
     success, h, transaction_paths = simulator.multi_commodity_flow_paths(
         commodities, threshold, limit, aggressiveness)
-
+    
     if not success:
         st.write("No viable paths found or not enough capacity.")
-        if st.button("Reset"):
-            del st.session_state['button_pressed']
     else:
         graph_data = nx.node_link_data(h)
-        
-        graph_html = create_network_visualization(
-            graph_data, layout_options, transaction_paths)
-        
-        col1, col2, col3, col4, col5 = st.columns(5)
-
-        with col1:
-            if st.button("Reset"):
-                del st.session_state['button_pressed']
-
-        with col2:
-            if st.button("Default"):
-                graph_html = create_network_visualization(
-                    simulator.get_graph_data(), layout_options)
-
-        with col3:
-            if st.button("Preprocessing"):
-                graph_html = create_network_visualization(
-                    graph_data, layout_options)
-
-        with col4:
-            if st.button("Routing"):
-                graph_html = create_network_visualization(
-                    graph_data, layout_options, transaction_paths)
-
-        with col5:
-            if st.button("Final"):
-                graph_html = create_network_visualization(
-                    simulator.get_graph_data(), layout_options, transaction_paths)
-
+        graph_html = create_network_visualization(graph_data, layout_options, transaction_paths)
         bg = "<style>:root {background-color: #0e1117; margin: 0px; padding: 0px;}</style>"
 
         st.components.v1.html(bg + graph_html, height=770, width=752)
+else:
+    st.write("Please enter the source, sink, and amount correctly.")
