@@ -25,7 +25,7 @@ def create_network_visualization(graph_data, layout_options, transaction_paths=N
     for node in graph_data['nodes']:
         node_color = mcolors.to_hex(red_to_green(node['rating']))
         net.add_node(node['id'], label=node.get('label', ''),
-                     title=node.get('title', ''), color=node_color)
+                     title=node.get('title', str(round(node['rating']*100, 2)) + "%"), color=node_color)
 
     # Flatten the transaction paths for easy edge checking
     transaction_paths = transaction_paths or []

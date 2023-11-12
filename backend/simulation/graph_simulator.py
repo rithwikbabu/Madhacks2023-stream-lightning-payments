@@ -12,7 +12,6 @@ from hedera import (
     Hbar
 )
 
-
 class GraphSimulator:
     def __init__(self, use_hedera=False):
         self.graph = nx.Graph()
