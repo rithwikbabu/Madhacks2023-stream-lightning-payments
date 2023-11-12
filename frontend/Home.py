@@ -1,10 +1,10 @@
+from backend.simulation.graph_simulator import GraphSimulator
 import streamlit as st
 import sys
 import time
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from backend.simulation.graph_simulator import GraphSimulator
 
 
 # Set page configuration
@@ -27,7 +27,8 @@ with st.sidebar:
             simulator = GraphSimulator(use_hedera=True)
             st.session_state['hedera'] = True
             time.sleep(5)
-            st.success('Connected to the Hedera Testnet')  # This will be displayed when the method errors
+            # This will be displayed when the method errors
+            st.success('Connected to the Hedera Testnet')
 
 # Introduction Section
 st.markdown(
@@ -41,6 +42,16 @@ st.markdown(
     - **Cost-Effective**: 💰 Minimize transaction fees with smart path selection.
 
     **👈 Explore the features from the sidebar** to see how our software can transform your Bitcoin transaction experience!
+
+    ### Hedera Test Network Implementation:
+    In our commitment to simulate and improve our algorithms, we are now implementing a test network on Hedera. This allows us to leverage its hashgraph consensus mechanism for high throughput and secure transactions.
+
+    #### Benefits of Hedera Test Network:
+    - **High Throughput**: Enjoy faster transaction processing with Hedera's unique consensus mechanism.
+    - **Robust Security**: Test and simulate our algorithms on a network built with security in mind.
+    - **Real-World Simulation**: Experience how our algorithm performs in an environment that closely mimics the real-world scenario.
+
+    **🌐 Access our Hedera test network simulation** from the sidebar and witness the potential improvements in real-time.
 
     ### Learn More:
     - Dive into our [Documentation](AI) for technical details.
@@ -59,4 +70,5 @@ st.video("frontend/static/demo.mov")
 
 # Footer
 st.markdown("---")
-st.markdown("© 2023 Bitcoin Transaction Optimizer - Enhancing your Bitcoin experience.")
+st.markdown(
+    "© 2023 Bitcoin Transaction Optimizer - Enhancing your Bitcoin experience.")
