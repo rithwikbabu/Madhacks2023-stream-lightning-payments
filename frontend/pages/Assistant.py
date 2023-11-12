@@ -5,8 +5,7 @@ import json
 import os
 
 # Initialize the OpenAI client
-client = OpenAI(api_key='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')
-# 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
+client = OpenAI()
 
 # Retrieve an existing assistant
 assistant = client.beta.assistants.retrieve(

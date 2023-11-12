@@ -6,6 +6,15 @@ import matplotlib.colors as mcolors
 from pyvis.network import Network
 import streamlit as st
 
+# Sidebar with application information
+st.sidebar.title("BitRoute Optimizer")
+st.sidebar.markdown("⚡ Enhancing Bitcoin Transactions ⚡")
+st.sidebar.markdown("""
+- Efficient Pathfinding 🛣️
+- Enhanced Privacy 🔒
+- Cost-Effective 💰
+""")
+
 def create_network_visualization(graph_data, layout_options, transaction_paths=None):
     net = Network(height="750px", width="750px",
                   bgcolor="#0e1117", font_color="white")

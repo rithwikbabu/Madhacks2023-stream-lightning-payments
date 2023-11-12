@@ -55,7 +55,7 @@ st.markdown(
 )
 
 # Video or Animation (Placeholder for actual video or animation link)
-st.video("https://www.example.com/path_to_video.mp4")
+st.video("frontend/static/demo.mov")
 
 # Footer
 st.markdown("---")

@@ -12,6 +12,15 @@ st.set_page_config(
 
 st.title("💸 Make a BitRoute Transaction 💸")
 
+# Sidebar with application information
+st.sidebar.title("BitRoute Optimizer")
+st.sidebar.markdown("⚡ Enhancing Bitcoin Transactions ⚡")
+st.sidebar.markdown("""
+- Efficient Pathfinding 🛣️
+- Enhanced Privacy 🔒
+- Cost-Effective 💰
+""")
+
 # Initialize session state variables if not already set
 if 'user_address' not in st.session_state:
     st.session_state['user_address'] = ""
