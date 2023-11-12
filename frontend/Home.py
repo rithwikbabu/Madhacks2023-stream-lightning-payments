@@ -1,10 +1,12 @@
-from backend.simulation.graph_simulator import GraphSimulator
+
 import streamlit as st
 import sys
 import time
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
+from backend.simulation.graph_simulator import GraphSimulator
+
 
 
 # Set page configuration
