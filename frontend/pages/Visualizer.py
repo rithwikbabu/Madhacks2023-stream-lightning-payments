@@ -65,11 +65,24 @@ st.title("BitRoute Network Graph Simulator")
 # Initialize the graph simulator
 simulator = GraphSimulator()
 layout_options = simulator.get_pyvis_options("force_atlas")
-simulator.import_graph_from_csv('lightning_like_graph_md.csv')
+
+graphlink = "lightning_like_graph_md.csv"
+if 'hedera' in st.session_state:
+        graphlink = "lightning_like_graph_sm.csv"
+        
+simulator.import_graph_from_csv(graphlink)
 
 # Simplified input for source, sink, and amount
 input_string = st.text_input("Enter source, sink, and amount separated by commas (e.g., source,sink,amount;source,sink,amount)")
 split_input = input_string.split(';')
+
+col4, col5, col6 = st.columns(3)
+with col4:
+    threshold = st.slider("Threshold", 0.0, 1.0, 0.45, 0.01)
+with col5:
+    limit = st.slider("Limit", 0.0, 1.0, 0.2, 0.01)
+with col6:
+    aggressiveness = st.slider("Aggressiveness", 0, 5, 0)
 
 commodities = []
 for transaction in split_input:
@@ -78,11 +91,6 @@ for transaction in split_input:
     if len(parsed_input) == 3:
         source, sink, amount = parsed_input[0].strip(), parsed_input[1].strip(), float(parsed_input[2].strip())
         commodities.append({'source': source, 'sink': sink, 'amount': amount})
-    
-    # Fixed values for threshold, limit, and aggressiveness for this example
-    threshold = 0.45
-    limit = 0.2
-    aggressiveness = 0
     
 # Button to find paths
 if st.button("Find Paths"):

@@ -1,7 +1,10 @@
 import streamlit as st
 import sys
+import time
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).resolve().parent.parent))
+from backend.simulation.graph_simulator import GraphSimulator
 
 
 # Set page configuration
@@ -15,6 +18,16 @@ st.write("# Welcome to BitRoute Optimizer! ⚡")
 
 # Sidebar
 st.sidebar.success("Explore the features on the left.")
+
+# Adding a toggle switch in the sidebar to enable Hedera's testnet
+with st.sidebar:
+    hedera_testnet = st.checkbox("Enable Hedera Testnet")
+    if hedera_testnet:
+        with st.spinner('Waiting for Hedera testnet to initialize account...'):
+            simulator = GraphSimulator(use_hedera=True)
+            st.session_state['hedera'] = True
+            time.sleep(5)
+            st.success('Connected to the Hedera Testnet')  # This will be displayed when the method errors
 
 # Introduction Section
 st.markdown(

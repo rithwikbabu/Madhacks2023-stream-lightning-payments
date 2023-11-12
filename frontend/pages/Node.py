@@ -2,6 +2,8 @@ import streamlit as st
 from pathlib import Path
 import sys
 
+from backend.simulation.graph_simulator import GraphSimulator
+
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # Set page configuration
@@ -35,8 +37,11 @@ with st.form("node_addition_form", clear_on_submit=True):
     submit_button = st.form_submit_button("Add Node")
 
     if submit_button and node_id:
-        # Assuming we have a function to add a node to our graph and public ledger
-        # add_node_to_graph(node_id, node_attrs, add_to_public_ledger)
+        simulator = GraphSimulator()
+        simulator.add_node(node_id, node_attrs)
+        
+        # TODO: add public ledger option
+        
         st.success(f"Node {node_id} added successfully!")
 
 # Public Ledger Option

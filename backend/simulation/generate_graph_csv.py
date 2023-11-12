@@ -23,4 +23,4 @@ def generate_lightning_like_graph_csv(file_path, num_nodes, num_edges_per_node):
     df.to_csv(file_path, index=False)
 
 # Example usage
-generate_lightning_like_graph_csv('lightning_like_graph_md.csv', num_nodes=100, num_edges_per_node=5)
+generate_lightning_like_graph_csv('lightning_like_graph_sm.csv', num_nodes=3, num_edges_per_node=2)
